@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>ShopX</h1>
+  <input type="text" id="search" placeholder="Search products...">
+  <div class="cart-icon">🛒 <span id="count">0</span></div>
+  
+</header>
+<nav class="web">
+    <h3 id="kit">Filter</h3>
+    <button onclick="filterCategory('all')">All</button>
+    <button onclick="filterCategory('electronics')">Electronics</button>
+    <button onclick="filterCategory('clothing')">Clothing</button>
+  </nav>
+<main>
+  
+
+  <section id="products"></section>
+
+  <section class="cart">
+    <h2>Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: ₹<span id="total">0</span></h3>
+    <button class="submit">Submit</button>
+  </section>
+</main>
+
+<script src="script2.js"></script>
+</body>
+</html>
