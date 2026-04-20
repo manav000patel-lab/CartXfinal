@@ -63,8 +63,12 @@ function update() {
 
   document.getElementById("total").innerText = total;
 
-  // (optional but good)
+
   localStorage.setItem("cart", JSON.stringify(cart));
+ const totalItems=cart.reduce((sum,items) => sum +item.qty,0)
+ countEl.innerText=totalItems
+ localStorage.setItem("cart", JSON.stringify(cart));
+
 }
 function changeQty(index, delta) {
   if (!cart[index].qty) cart[index].qty = 1;
