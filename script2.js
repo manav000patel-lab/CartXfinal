@@ -36,27 +36,35 @@ function removeFromCart(index) {
   cart.splice(index, 1);
   update()
 }
-function update(){
-cartContainer.innerHTML = cart.map((item, i) => `
-  <div class="cart-card">
-    
-    <img src="${item.img}" class="cart-img">
+function update() {
+  cartContainer.innerHTML = cart.map((item, i) => `
+    <div class="cart-card">
+      <img src="${item.img}" class="cart-img">
 
-    <div class="cart-info">
-      <h4>${item.name}</h4>
-      <p>₹${item.price}</p>
+      <div class="cart-info">
+        <h4>${item.name}</h4>
+        <p>₹${item.price}</p>
 
-      <div class="qty">
-        <button onclick="changeQty(${i}, -1)">−</button>
-        <span>${item.qty || 1}</span>
-        <button onclick="changeQty(${i}, 1)">+</button>
+        <div class="qty">
+          <button onclick="changeQty(${i}, -1)">−</button>
+          <span>${item.qty || 1}</span>
+          <button onclick="changeQty(${i}, 1)">+</button>
+        </div>
       </div>
+
+      <button class="remove-btn" onclick="removeFromCart(${i})">✖</button>
     </div>
+  `).join('');
 
-    <button class="remove-btn" onclick="removeFromCart(${i})">✖</button>
 
-  </div>
-`).join('');
+  const total = cart.reduce((sum, item) => {
+    return sum + item.price * (item.qty || 1);
+  }, 0);
+
+  document.getElementById("total").innerText = total;
+
+  // (optional but good)
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 function changeQty(index, delta) {
   if (!cart[index].qty) cart[index].qty = 1;
