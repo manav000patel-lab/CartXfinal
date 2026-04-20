@@ -38,7 +38,7 @@ aside {
 }
 
 .card {
-  background: rgb(253, 253, 253);
+  background: white;
   padding: 10px;
   border-radius: 10px;
   transition: all 0.3s ease;
