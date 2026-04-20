@@ -9,12 +9,12 @@
 
 ]
 
-const countE1 = document.getElementById("count")
+
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 const productContainer = document.getElementById("products")
 const cartContainer = document.getElementById("cart-items")
-
+const countEl = document.getElementById("count")
 function renderProducts(data) {
   productContainer.innerHTML = data.map(p => `
   <div class="card">
@@ -28,13 +28,31 @@ function renderProducts(data) {
 
 function addToCart(id) {
   const item = products.find(p => p.id === id);
-  cart.push(item)
+  const exist = cart.find(p => p.id === id);
+
+  if (exist) {
+    exist.qty = (exist.qty || 1) + 1;
+  } else {
+    cart.push({ ...item, qty: 1 });
+  }
+
   update()
 }
 
 function removeFromCart(index) {
   cart.splice(index, 1);
   update()
+}
+function changeQty(index, delta) {
+  if (!cart[index].qty) cart[index].qty = 1;
+
+  cart[index].qty += delta;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  update();
 }
 function update() {
   cartContainer.innerHTML = cart.map((item, i) => `
@@ -62,25 +80,12 @@ function update() {
   }, 0);
 
   document.getElementById("total").innerText = total;
-
-
+const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  countEl.innerText = totalItems;
+  
   localStorage.setItem("cart", JSON.stringify(cart));
- const totalItems=cart.reduce((sum,items) => sum +item.qty,0)
- countEl.innerText=totalItems
- localStorage.setItem("cart", JSON.stringify(cart));
-
 }
-function changeQty(index, delta) {
-  if (!cart[index].qty) cart[index].qty = 1;
 
-  cart[index].qty += delta;
-
-  if (cart[index].qty <= 0) {
-    cart.splice(index, 1);
-  }
-
-  update();
-}
 
 function filterCategory(category) {
   if (category === "all") return renderProducts(products)
