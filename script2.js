@@ -9,7 +9,7 @@
 
 ]
 
-
+const countE1 = document.getElementById("count")
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
 const productContainer = document.getElementById("products")
