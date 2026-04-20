@@ -1,7 +1,7 @@
 body {
   font-family: Arial;
   margin: 0;
-  background: #f5f5f5;
+  background: #f49898;
 }
 
 header {
@@ -18,9 +18,9 @@ input {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 200px 1fr 300px;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   padding: 10px;
 }
 
@@ -33,17 +33,52 @@ aside {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
+  flex: auto;
+  background-color: rgb(126, 134, 136);
 }
 
 .card {
-  background: white;
+  background: rgb(143, 212, 232);
   padding: 10px;
   border-radius: 10px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s forwards;
+  
 }
 
 .card:hover {
   transform: scale(1.05);
+}
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  animation: slideIn 0.3s ease;
+  background-color: black;
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 button {
@@ -53,16 +88,33 @@ button {
   color: white;
   cursor: pointer;
 }
+button:hover {
+  background: #ff4c4c;
+  transform: scale(1.05);
+}
+header {
+  animation: topDown 0.5s ease;
+}
+
+@keyframes topDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
 .cart {
   background: white;
   padding: 10px;
+  background-color: black;
+  color: red;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-}
+
 .web{
     width:100%;
     height:80px;
@@ -77,4 +129,52 @@ button {
   color: white;
   font-size: larger;
   text-transform: capitalize;
+}
+.cart-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  animation: slideIn 0.3s ease;
+}
+
+.cart-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.cart-info h4 {
+  margin: 0;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.qty button {
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+.remove-btn {
+  background: rgb(20, 19, 19);
+  padding: 5px 8px;
+  border-radius: 50%;
+}
+.cart-info{
+  width:60px;
+  align-items: center;
+  justify-content: center;
+  color: #222;
 }
